@@ -1,13 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
-	"encoding/json"
-	"net/http"
 	"math/rand"
-	"time"
+	"net/http"
 	"strconv"
+	"time"
+
 	"github.com/gorilla/mux"
 )
 
@@ -96,8 +97,15 @@ func updateUser(w http.ResponseWriter, r *http.Request)  {
 		
 	}
 }
+// delete user
+func deleteUser(w http.ResponseWriter, r *http.Request)  {
+	w.Header().Set("Contant-Type", "application/json")
+	// json.NewEncoder(w).Encode(users)
+	
+}
  
 func main() {
+	fmt.Printf("Server is running to port no 8000...") 
 	
 	// init Router
 	r := mux.NewRouter()
@@ -105,13 +113,14 @@ func main() {
 	// Mock data
 	users = append(users , User{Id:"1", FirstName:"joan", LastName:"smit", DateOfBirth: "12-3-20", Email:"joan@gmail.com", PhoneNumber: 768756789})
 	users = append(users , User{Id:"2", FirstName:"max", LastName:"may", DateOfBirth: "12-8-20", Email:"max@gmail.com", PhoneNumber: 435798776})
-
+ // git config --global user.email "you@example.com"
+ //  git config --global user.name "Your Name"
 	// Route Handlers / Endpoints
 	r.HandleFunc("/api/users", getUsers).Methods("GET")
 	r.HandleFunc("/api/users/{id}", getUser).Methods("GET")
 	r.HandleFunc("/api/users", ctreateUser).Methods("POST")
 	r.HandleFunc("/api/users/{id}", updateUser).Methods("PUT")
+	r.HandleFunc("/api/users/{id}", deleteUser).Methods("DELETE")
 	
 	log.Fatal(http.ListenAndServe(":8000",r))
-	fmt.Printf("Server is running to port no 8000...") 
 }
