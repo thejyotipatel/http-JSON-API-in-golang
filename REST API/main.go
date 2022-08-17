@@ -114,7 +114,7 @@ func updateUser(w http.ResponseWriter, r *http.Request) {
 
 // delete user
 func deleteUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Delete one user")
+	// fmt.Println("Delete one user")
 
 	w.Header().Set("Contant-Type", "application/json")
 
@@ -131,7 +131,7 @@ func deleteUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func serverPage(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Welcome this side and server running at 8000.</h1>"))
+	w.Write([]byte("<h1>Welcome this side and server running at 5000.</h1>"))
 }
 
 func main() {
